@@ -1,6 +1,6 @@
 from enum import Enum, auto
 
-from unibet import Unibet
+from src.unibet import Unibet
 
 class Leagues(Enum):
     EPL = auto()
