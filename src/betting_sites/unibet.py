@@ -5,7 +5,7 @@ import re
 from selenium.webdriver.common.by import By
 import pytz
 
-from src.betting_site_scraper import BettingSiteScraper
+from src.betting_sites.betting_site_scraper import BettingSiteScraper
 from src.utils import read_json
 from src.match_object import MatchObject
 

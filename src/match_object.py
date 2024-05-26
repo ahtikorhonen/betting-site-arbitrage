@@ -1,6 +1,7 @@
 from datetime import datetime
+from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 class MatchObject(BaseModel):
     '''
@@ -11,7 +12,7 @@ class MatchObject(BaseModel):
         home_name (str): name of the home team
         away_name (str): name of the away team
         home_odds (float): odds of home team winning
-        tie_odds (float): odds of a tie
+        draw_odds (float | None): odds of a draw
         away_odds (float): odds of away team winning
         date (datetime): year, month and day that the match will be played on
     '''
@@ -19,15 +20,24 @@ class MatchObject(BaseModel):
     home_name: str
     away_name: str
     home_odds: float
-    tie_odds: float
+    draw_odds: Optional[float] = None
     away_odds: float
     date: datetime
     
     def __init__(self, *args):
         '''
-        Define the __init__ function for the purpose of initializing objects from a list e.g. MatchObject(*input_list).
+        __init__ function overriden for the purpose of initializing objects without a dict.
         '''
         field_names = self.__fields__.keys()
         kwargs = dict(zip(field_names, args))
         
         super().__init__(**kwargs)
+        
+    @validator('home_odds', 'draw_odds', 'away_odds', pre=True, always=True)
+    def replace_comma(cls, v):
+        '''
+        Replace commas in odds with periods to make float conversion possible.
+        '''
+        if v is not None:
+            return v.replace(',', '.')
+        return v

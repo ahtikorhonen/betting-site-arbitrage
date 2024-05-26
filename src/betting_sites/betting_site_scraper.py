@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import pandas as pd
 
 class BettingSiteScraper:
     '''
@@ -17,6 +18,7 @@ class BettingSiteScraper:
     '''
     def __init__(self) -> None:
         self.odds = defaultdict()
+        self.odds_df = pd.DataFrame(columns=['League', 'URL', 'Match date', 'Home', 'Away', 'Home odds', 'Draw odds', 'Away odds'])
         self._driver = webdriver.Chrome("/Users/ahtikorhonen/Desktop/bet-arb/chromedriver")
         self._wait = WebDriverWait(self._driver, 30)
         

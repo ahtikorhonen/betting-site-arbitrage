@@ -1,2 +1,4 @@
 selenium==4.9.0
 pydantic==2.7.1
+pandas==2.2.2
+numpy==1.26.4
