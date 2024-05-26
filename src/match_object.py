@@ -5,6 +5,15 @@ from pydantic import BaseModel
 class MatchObject(BaseModel):
     '''
     A dataclass to store information about a single match on a single betting site.
+    
+    Params:
+        site (str): betting site url
+        home_name (str): name of the home team
+        away_name (str): name of the away team
+        home_odds (float): odds of home team winning
+        tie_odds (float): odds of a tie
+        away_odds (float): odds of away team winning
+        date (datetime): year, month and day that the match will be played on
     '''
     site: str
     home_name: str

@@ -1,0 +1,13 @@
+{
+    "leagues": {
+        "NHL": {
+            "url": "https://www.veikkaus.fi/fi/vedonlyonti/pitkaveto?t=3-2-1_NHL"
+        }
+    },
+    "elements": {
+        "accept_cookies": "//*[@id='save-necessary-action']",
+        "match_data_row": "subpage-game-row",
+        "date_element": "//*[@datetime]",
+        "match_element": "[data-test-name='event']"
+    }
+}

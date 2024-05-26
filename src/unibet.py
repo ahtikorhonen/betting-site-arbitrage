@@ -17,7 +17,7 @@ class Unibet(BettingSiteScraper):
         self.leagues = self.data["leagues"]
         self.elements = self.data["elements"]
         
-    def get_odds(self):
+    def get_odds(self) -> None:
         '''
         Scrape the odds of all games from the leagues specified in the unibet_data.json file,
         and add them to the objects odds dictionary.
@@ -43,13 +43,15 @@ class Unibet(BettingSiteScraper):
                         
             self.odds[league_name] = date_match_dict
             
+        self._driver.close()
+            
     def transform_to_datetime(self, datetime_str: str) -> datetime:
         '''
         Converts the datetime string from unibet to datetime object in GMT+00 format.
         
         Params:
              datetime_str (str): string to be converted to datetime object.
-        returns: datetime object
+        returns: datetime object 
         '''
         cleaned_str = re.sub(r'\s+\([^)]*\)', '', datetime_str)
     
@@ -57,4 +59,4 @@ class Unibet(BettingSiteScraper):
         
         utc_time = local_time.astimezone(pytz.utc)
         
-        return utc_time
+        return datetime(utc_time.year, utc_time.month, utc_time.day)

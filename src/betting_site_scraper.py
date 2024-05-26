@@ -3,6 +3,8 @@ from collections import defaultdict
 
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 class BettingSiteScraper:
     '''
@@ -24,4 +26,10 @@ class BettingSiteScraper:
         Abstract method that all subclasses need to implement. Fills the odds dictionary.
         '''
         pass
+    
+    def click(self, xpath):
+        try:
+            self._wait.until(EC.element_to_be_clickable((By.XPATH, xpath))).click()
+        except Exception as e:
+            raise Exception(str(e))
         
