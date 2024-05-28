@@ -1,10 +1,10 @@
 {
     "leagues": {
-        "NHL": {
-            "url": "https://www.veikkaus.fi/fi/vedonlyonti/pitkaveto?t=3-2-1_NHL"
-        },
         "ATP": {
             "url": "https://www.veikkaus.fi/fi/vedonlyonti/pitkaveto?t=77-rb872-r5e470b1_Ranskan%20avoimet%2C%20miehet"
+        },
+        "NHL": {
+            "url": "https://www.veikkaus.fi/fi/vedonlyonti/pitkaveto?t=3-2-1_NHL"
         }
     },
     "elements": {

@@ -1,15 +1,15 @@
 {
     "leagues": {
-        "NHL": {
-            "url": "https://www.unibet.com/betting/sports/filter/ice_hockey/nhl/all/matches"
+        "ATP": {
+            "url": "https://www.unibet.com/betting/sports/filter/tennis/grand_slam/all/matches"
         },
-        "EPL": {
-            "url": "https://www.unibet.com/betting/sports/filter/football/england/premier_league/all/matches"
+        "NHL": {
+            "url": "https://www.unibet.com/betting/sports/filter/ice_hockey/all/matches"
         }
     },
     "elements": {
-        "match_container": "_79bb0",
+        "tournament_container": "_5f930",
         "date_element": "//*[@datetime]",
-        "match_element": "[data-test-name='event']"
+        "nested_match_element": "[data-test-name='matchEvent']"
     }
 }

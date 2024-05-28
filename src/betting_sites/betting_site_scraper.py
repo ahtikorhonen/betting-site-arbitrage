@@ -12,7 +12,7 @@ class BettingSiteScraper:
     A base class for all betting sites that are used.
     
     Parameters:
-        odds (dict): a nested dictionary of the form {'league_name': {'date': [match_obj, ...]}}.
+        odds_df (pd.Dataframe): A dataframe which contains all the odds of specific bookmaker.
         _driver (WebDrived): Selenium chrome webdriver object.
         _wait (WebDriverWait): Selenium webdriverwait object.
     '''

@@ -19,7 +19,7 @@ class Veikkaus(BettingSiteScraper):
         
     def get_odds(self) -> None:
         '''
-        Scrape the odds of all games from the leagues specified in the unibet_data.json file,
+        Scrape the odds of all games from the leagues specified in the veikkaus_data.json file,
         and add them to the objects odds_df dataframe.
         '''
         
@@ -29,13 +29,13 @@ class Veikkaus(BettingSiteScraper):
             
             if idx == 0: self.click(self.elements['accept_cookies'])
             for match_data_row in self._wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, self.elements["match_data_row"]))):
-                single_match_data = match_data_row.text.split('\n')[:-2]
+                match_details = match_data_row.text.split('\n')[:-2]
                 
-                # if match is ongoing skip.
-                if single_match_data[0].isdigit():
+                # if match is ongoing, skip.
+                if match_details[0].isdigit():
                     continue
                 
-                match_date, match_details = self.handle_match_data(single_match_data)
+                match_date, match_details = self.handle_match_data(match_details)
                 
                 # some data is missing, skip.
                 if len(match_details) != 5:
@@ -43,7 +43,7 @@ class Veikkaus(BettingSiteScraper):
                 single_match_data_df = pd.DataFrame(columns=self.odds_df.columns.values.tolist(), data=[[league_name, url, match_date, *match_details]])
                 self.odds_df = pd.concat([self.odds_df, single_match_data_df])
                     
-    def handle_match_data(self, match_details: list[str]) -> pd.DataFrame:
+    def handle_match_data(self, match_details: list[str]) -> tuple[datetime, list[str]]:
         '''
         A helper function that parses single rows of match information into a form that is suitable for our dataframe.
         
@@ -76,6 +76,7 @@ class Veikkaus(BettingSiteScraper):
         Returns:
             datetime object
         '''
+        print(time_str)
         hour, minute = time_str.split('.')
         finland_tz = pytz.timezone('Europe/Helsinki')
         now = datetime.now(finland_tz)
@@ -111,4 +112,4 @@ class Veikkaus(BettingSiteScraper):
         
         gmt_time = next_day_at_time.astimezone(pytz.utc)
             
-        return datetime(gmt_time.year, gmt_time.month, gmt_time.day)
+        return gmt_time
